@@ -1,0 +1,51 @@
+create table WritingGroups(
+GroupName varchar(50) not null,
+HeadWriter varchar(50) ,
+YearFormed int not null,
+Subject varchar(50) not null,
+constraint WritingGroups_pk primary key(GroupName));
+
+
+create table Publishers(
+PublisherName varchar(50) not null,
+PublisherAddress varchar(50) not null,
+PublisherPhone varchar(50) not null,
+PublisherEmail varchar(50) not null,
+constraint Publishers_pk primary key(PublisherName));
+
+create table Books(
+GroupName varchar(50) not null,
+BookTitle varchar(50) not null,
+PublisherName varchar(50) not null,
+YearPublished int not null,
+NumberPages int not null,
+constraint Books_pk primary key(GroupName, BookTitle),
+constraint Books_fk foreign key(GroupName)
+        references WritingGroups(GroupName));
+
+insert into WritingGroups(GroupName, HeadWriter, YearFormed, Subject)
+values('Anime Delights', 'Hina', 1996, 'Romance'),
+      ('Light Novelmania', 'Rose', 2001, 'Fantasy'),
+      ('Fallout n Skyrim', 'Todd Howard', 2008, 'Fantasy/Adventure'),
+      ('8 Ball Authors', 'Momo', 1907, 'Horror'),
+      ('Genius Writers', 'Clementine', 2020, 'Science Fiction'),
+      ('The Goonies', 'Frank', 2000, 'Biographical'),
+      ('Fiction Writers', 'Troy Denning', 1989, 'Fantasy');
+
+	
+insert into Books(GroupName, BookTitle, PublisherName, YearPublished, NumberPages)
+values('Anime Delights', 'Fallen Over You', 'Neko Neko Studios', 2008, 1200),
+      ('Light Novelmania', 'Starting From Zero', 'Aniplex', 2002, 500),
+      ('Fallout n Skyrim', 'Forkgive Me', '3 Bit Studios', 2009, 1500),
+      ('Fiction Writers', 'Shadows of Reach', 'Gallery Books', 2020, 423),
+      ('Fiction Writers', 'Star Wars: High Republic', 'Gallery Books', 2020, 985),
+      ('8 Ball Authors', 'Jobs', 'Warner Bros', 2004, 530),
+      ('Genius Writers', 'Coding 101', 'Warner Bros', 2013, 10001);
+
+
+insert into Publishers(PublisherName, PublisherAddress, PublisherPhone, PublisherEmail)
+values('Neko Neko Studios', '2054 Nani St', '7145356356', 'nekoneko@studios.com'),
+      ('Aniplex', '4652 Central Ave', '3232647539', 'aniplex@email.com'),
+      ('3 Bit Studios', '0001 Rocky Dr', '3333333333', '3bitsudios@haijima.com'),
+      ('Gallery Books', 'Midtown Manhattan, New York City, New York', '456-345-9948', 'gallerybook@gmail.com'),
+      ('Warner Bros', '2070 Morning Ave', '4445556666', 'warnerbros@books.com');
